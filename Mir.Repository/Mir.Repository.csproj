@@ -2,11 +2,35 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>YuanZhenfeng</Authors>
+    <PackageIconUrl>http://pj6twxl4t.bkt.clouddn.com/MirProjectIcon.jpg</PackageIconUrl>
+    <Description>.Net Standard 2.0 数据仓储，对SqlSugar And Redis 进行扩展</Description>
+    <PackageLicenseUrl>https://github.com/miryuan/Mir.Repository/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/miryuan/Mir.Repository</PackageProjectUrl>
+    <NeutralLanguage>zh-CN</NeutralLanguage>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlSugarCore" Version="4.9.7" />
+    <Compile Remove="ConnectionStrings.cs" />
+    <Compile Remove="DbFactory.cs" />
+    <Compile Remove="DbType.cs" />
+    <Compile Remove="IDbFactory.cs" />
+    <Compile Remove="RepositoryMySql.cs" />
+    <Compile Remove="RepositoryOracle.cs" />
+    <Compile Remove="RepositorySqlite.cs" />
+    <Compile Remove="RepositorySqlServer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlSugarCore" Version="4.9.7.1" />
     <PackageReference Include="StackExchange.Redis" Version="2.0.519" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mir.Admin\Mir.Core\Mir.Core.csproj" />
+    <ProjectReference Include="..\..\Mir.Commons\Mir.Commons\Mir.Commons.csproj" />
   </ItemGroup>
 
 </Project>
