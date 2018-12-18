@@ -12,7 +12,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.1\Mir.Repository.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
+    <Compile Remove="CacheHelper.cs" />
     <Compile Remove="ConnectionStrings.cs" />
     <Compile Remove="DbFactory.cs" />
     <Compile Remove="DbType.cs" />
@@ -25,11 +30,11 @@
 
   <ItemGroup>
     <PackageReference Include="sqlSugarCore" Version="4.9.7.1" />
-    <PackageReference Include="StackExchange.Redis" Version="2.0.519" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mir.Admin\Mir.Core\Mir.Core.csproj" />
+    <ProjectReference Include="..\..\Mir.Admin\Mir.Model\Mir.Model.csproj" />
     <ProjectReference Include="..\..\Mir.Commons\Mir.Commons\Mir.Commons.csproj" />
   </ItemGroup>
 

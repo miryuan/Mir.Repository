@@ -7,18 +7,28 @@
 * 版权所有 ：袁振峰
 * 联系方式 ：http://www.ustuy.com/ 
 ******************************************************************/
-using Microsoft.Extensions.Options;
-using Mir.Core;
+using Mir.Model.Config;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Mir.Repository
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class BaseRepository<TEntity> : IDisposable, IRepository<TEntity> where TEntity : class, new()
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly SqlSugarClient Client;
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseRepository()
         {
             var setting = Core.AutofacExt.Resolve<ConnectionStrings>();
@@ -146,6 +156,19 @@ namespace Mir.Repository
                 return Client.Queryable<TEntity>().Where(where).ToList();
             else
                 return Client.Queryable<TEntity>().Where(where).OrderBy(order, type).ToList();
+        }
+
+        /// <summary>
+        /// 查询第一条数据
+        /// </summary>
+        /// <param name="where">查询条件</param>
+        /// <param name="order">排序</param>
+        /// <param name="type">排序方式</param>
+        /// <returns>TEntity</returns>
+        public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> where = null, Expression<Func<TEntity, object>> order = null, OrderByType type = OrderByType.Asc)
+        {
+            var list = GetList(where, order, type);
+            return list.First();
         }
 
         /// <summary>

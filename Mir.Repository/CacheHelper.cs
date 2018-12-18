@@ -9,13 +9,12 @@
 ******************************************************************/
 using Mir.Commons.Extensions;
 using Mir.Commons.Log;
-using Mir.Core;
+using Mir.Model.Config;
 using StackExchange.Redis;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Mir.Repository
@@ -25,11 +24,12 @@ namespace Mir.Repository
     /// </summary>
     public class CacheHelper : IDisposable
     {
-        //RedisConnectionStrings connectionSettings;
         RedisConnectionHelp connect;
+        /// <summary>
+        /// 
+        /// </summary>
         public CacheHelper()
         {
-            //connectionSettings = Core.AutofacExt.Resolve<RedisConnectionStrings>();
             connect = new RedisConnectionHelp();
         }
         private int DbNum { get; }
@@ -1050,6 +1050,9 @@ namespace Mir.Repository
             return redisKeys.Select(redisKey => (RedisKey)redisKey).ToArray();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
 
@@ -1064,6 +1067,9 @@ namespace Mir.Repository
     public class RedisConnectionHelp
     {
         RedisConnectionStrings connectionSettings;
+        /// <summary>
+        /// 
+        /// </summary>
         public RedisConnectionHelp()
         {
             connectionSettings = Core.AutofacExt.Resolve<RedisConnectionStrings>();
